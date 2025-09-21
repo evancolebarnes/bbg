@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+console.log('Github Script')
   gsap.utils.toArray(".home-hero_image-item").forEach((el) => {
     ScrollTrigger.create({
       trigger: el,
