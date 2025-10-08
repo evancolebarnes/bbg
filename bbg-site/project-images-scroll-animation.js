@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   gsap.utils.toArray(".animated-project_media-item").forEach((el) => {
     ScrollTrigger.create({
       trigger: el,
