@@ -1,5 +1,4 @@
 const dropToBottomFn = (wrap, target = ".bg_circle") => {
-  
   ScrollTrigger.create({
     trigger: sec,
     start: "top 80%", //
