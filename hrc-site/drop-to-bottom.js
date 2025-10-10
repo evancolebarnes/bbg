@@ -8,7 +8,8 @@ const dropToBottomFn = (wrap, target = ".bg_circle") => {
     onEnter: () => {
       gsap.to(circlesArr, {
         bottom: 0,
-        margin: 0,
+        marginTop: 0,
+        marginBottom: 0,
         ease: "bounce.out",
         duration: 2,
         stagger: { each: 0.25, from: "end" },
