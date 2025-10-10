@@ -1,17 +1,13 @@
 const dropToBottomFn = (wrap, target = ".bg_circle") => {
-  const sec = document.querySelector(wrap);
+  const wrapper = document.querySelector(wrap);
+  const circlesArr = gsap.utils.toArray(wrapper.querySelectorAll(target));
   ScrollTrigger.create({
-    trigger: sec,
+    trigger: wrapper,
     start: "top 80%", //
     end: "bottom top",
     onEnter: () => {
-      const secRect = sec.getBoundingClientRect();
-      const circlesArr = gsap.utils.toArray(sec.querySelectorAll(target));
       gsap.to(circlesArr, {
-        y: (i, el) => {
-          const circleRect = el.getBoundingClientRect();
-          return secRect.bottom - circleRect.top - circleRect.height;
-        },
+        bottom: 0,
         ease: "bounce.out",
         duration: 2,
         stagger: { each: 0.25, from: "end" },
