@@ -13,7 +13,7 @@ const hideNav = () => {
 }
 
 ScrollTrigger.create({
-	trigger: 'bosy',
+	trigger: 'body',
 	start: 'top center',
 	end: 'bottom 50%+=100px',
   marker: true
