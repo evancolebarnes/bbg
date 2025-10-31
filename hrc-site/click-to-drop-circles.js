@@ -2,7 +2,7 @@ const dropCircles = () => {
   const circlesArr = gsap.utils.toArray(
   document.querySelector(".optin_form_wrap").querySelectorAll(".bg_circle")
 );
-const triggerButtons = document.querySelector('[data-opt-in-popup]');
+const triggerButtons = [...document.querySelectorAll('[data-opt-in-popup]')];
 
 triggerButtons.forEach((btn) => {
   btn.addEventListener("click", function () {
