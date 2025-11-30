@@ -14,23 +14,27 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const input = document.querySelector("[data-location-input]");
-  if (!input) {
+  const inputs = [...document.querySelectorAll("[data-location-input]")];
+  if (!(inputs.length > 0)) {
     // safety fallback
     showNav(defaultNav);
     return;
   }
 
   window.fsAttributes = window.fsAttributes || [];
-  input.value = loc;
+  //   inputs.forEach(i=>{i.value = loc});
   window.fsAttributes.push([
     "cmsfilter",
     (filterInstances) => {
       console.log("cmsfilter Successfully loaded!");
-      input.dispatchEvent(new Event("input", { bubbles: true }));
+      inputs.forEach((i) => {
+        i.value = loc;
+        i.dispatchEvent(new Event("input", { bubbles: true }));
+      });
+
       // The callback passes a `filterInstances` array with all the `CMSFilters` instances on the page.
       const [filterInstance] = filterInstances;
-
+      a;
       // The `renderitems` event runs whenever the list renders items after filtering.
       filterInstance.listInstance.on("renderitems", (renderedItems) => {
         console.log(renderedItems);
