@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+
+window.addEventListener("load", () => {
   const selectFields = document.querySelectorAll(".is-drop-down");
   const selectFieldsArr = Array.from(selectFields);
 
