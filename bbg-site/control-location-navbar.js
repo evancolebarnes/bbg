@@ -1,12 +1,12 @@
 const showEl = (elArr) => {
-  elArr.forEach((el) => {
-    el.classList.remove("display-none");
-  });
+elArr.forEach(el => {
+  el.classList.remove("display-none");  
+});
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const defaultEl = [...document.querySelectorAll(".el_default")];
-  const locationEl = [...document.querySelectorAll(".el_location")];
+const defaultEl = [...document.querySelectorAll(".el_default")];
+const locationEl = [...document.querySelectorAll(".el_location")];
 
   const loc = localStorage.getItem("userLocation");
 
