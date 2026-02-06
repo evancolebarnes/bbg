@@ -27,7 +27,7 @@
     });
   }
 
-  window.bbG_Ulity ||= {};
+  window.bbG_Utility ||= {};
   
-  window.bbG_Ulity.SliderHeightUtility = setSliderHeight;
+  window.bbG_Utility.SliderHeightUtility = setSliderHeight;
 })();
