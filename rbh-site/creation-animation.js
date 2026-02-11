@@ -41,7 +41,6 @@ const setupCreationAnimation = () => {
     const primaryImage = primaryImageWrap.querySelector(".u-image-wrapper");
     const secondaryImage = block.querySelector(".creation_content_image");
     const revealBlocks = block.querySelectorAll(".reveal_block");
-    console.log(arr.length);
 
     const step = gsap.timeline();
 
@@ -49,7 +48,6 @@ const setupCreationAnimation = () => {
       const prevoiusTextElements = allCreationBlock[i - 1].querySelectorAll([
         "[data-contains-text]",
       ]);
-      console.log(allCreationBlock[i - 1]);
       step
         .to(allCreationBlock[i - 1], { pointerEvents: "none" }, 0)
         .set(prevoiusTextElements, { opacity: 0 }, 0);
