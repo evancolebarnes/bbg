@@ -1,13 +1,16 @@
 const setupFoundationAnimation = () => {
+  const track = document.querySelector('.foundation_track');
+  
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".foundation_track",
+      trigger: track,
       start: "top top",
-      end: "bottom bottom",
+      end: () => "+=" + track.offsetHeight,
       scrub: true,
       pin: true,
       markers: false,
       anticipatePin: 1,
+      invalidateOnRefresh: true,
     },
   });
 
