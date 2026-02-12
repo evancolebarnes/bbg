@@ -8,7 +8,7 @@ const setupFoundationAnimation = () => {
       start: "top top",
       end: () => {
         const isMobile = window.innerWidth <= 767
-        return isMobile ? window.innerHeight / 2 : 'bottom bottom';
+        return isMobile ? "+=" + window.innerHeight / 2 : 'bottom bottom';
       },
       scrub: true,
       pin: true,
