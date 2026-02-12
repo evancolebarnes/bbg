@@ -1,4 +1,4 @@
-const setupfoundationAnimation = () => {
+const setupFoundationAnimation = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".foundation_track",
