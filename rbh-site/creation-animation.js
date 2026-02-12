@@ -1,5 +1,5 @@
 const setupCreationAnimation = () => {
-  const creationSec = document.querySelector(".creation_sec");
+  const creationSec = document.querySelector(".creation_wrap");
   const allCreationBlock = [
     ...document.querySelectorAll(".creation_collection_item"),
   ];
