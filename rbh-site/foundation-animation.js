@@ -1,11 +1,14 @@
 const setupFoundationAnimation = () => {
+  
   const track = document.querySelector('.foundation_track');
+
+  const isMobile = window.innerWidth <= 767
   
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: track,
       start: "top top",
-      end: () => "+=" + track.offsetHeight,
+      end: () => "+=" + (isMobile ? window.innerHeight / 2 : 0),
       scrub: true,
       pin: true,
       markers: false,
