@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+const setupfoundationAnimation = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".foundation_track",
@@ -26,4 +26,4 @@ window.addEventListener("load", () => {
       clipPath: "polygon(0 0,0 100%,0% 100%,0% 0)",
       duration: 2,
     });
-});
+};
