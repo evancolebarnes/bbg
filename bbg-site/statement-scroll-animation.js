@@ -13,7 +13,7 @@ const setupStatementAnimation = () => {
       scrub: true,
       pin: true,
       anticipatePin: 1,
-      markers: true,
+      markers: false,
       invalidateOnRefresh: true,
     },
   });
