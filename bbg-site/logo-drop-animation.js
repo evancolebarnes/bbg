@@ -1,3 +1,4 @@
+const setupLogoDropAnimation = () -> {
  SplitText.create("[data-anim='Gravity Text']", {
   type: "lines, words, chars",
   autoSplit: true,
@@ -29,3 +30,4 @@
     });
   }
 });
+}
