@@ -6,7 +6,7 @@ const setupStatementAnimation = () => {
     scrollTrigger: {
       trigger: frame,
       start: "top top",
-      end: "+=250svh",
+      end: "+=250%",
       scrub: true,
       pin: true,
       anticipatePin: 1,
