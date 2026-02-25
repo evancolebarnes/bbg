@@ -2,14 +2,11 @@ const setupStatementAnimation = () => {
   const frame = document.querySelector(".statement_track");
   if (!frame) return;
 
-
-  gsap.set(frame, { height: "500vh" });
-
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: frame,
       start: "top top",
-      end: "bottom bottom",
+      end: "+=250svh",
       scrub: true,
       pin: true,
       anticipatePin: 1,
