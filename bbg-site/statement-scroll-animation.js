@@ -3,7 +3,7 @@ const setupStatementAnimation = () => {
   if (!frame) return;
 
 
-  gsap.set(frame, { height: "250svh" });
+  gsap.set(frame, { height: "500svh" });
 
   const tl = gsap.timeline({
     scrollTrigger: {
