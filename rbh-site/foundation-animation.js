@@ -6,10 +6,7 @@ const setupFoundationAnimation = () => {
     scrollTrigger: {
       trigger: track,
       start: "top top",
-      end: () => {
-        const isMobile = window.innerWidth <= 767
-        return isMobile ? `bottom+=${window.innerHeight} bottom` : 'bottom bottom';
-      },
+      end: "+=300%",
       scrub: true,
       pin: true,
       markers: false,
