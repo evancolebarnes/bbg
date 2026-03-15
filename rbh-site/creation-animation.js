@@ -11,7 +11,7 @@ const setupCreationAnimation = () => {
     scrollTrigger: {
       trigger: creationSec,
       start: "top top",
-      end: "bottom bottom",
+      end: "+=400%",
       pin: true,
       scrub: true,
       markers: false,
