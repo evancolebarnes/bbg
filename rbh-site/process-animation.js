@@ -8,15 +8,11 @@ const setupProcessAnimation = () => {
 
   gsap.set(allParaWrap, { height: 0, overflow: "hidden" });
 
-  gsap.set('.process_track', {
-    height:'500svh'
-  })
-
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".process_track",
       start: "top top",
-      end: "bottom bottom",
+      end: "+=400%",
       pin: true,
       scrub: true,
       markers: false,
