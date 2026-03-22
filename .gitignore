@@ -1,0 +1,9 @@
+# ignore node modules
+node_modules/
+
+# ignore dist everywhere
+dist/
+
+# but allow this specific dist
+!bbg/rbh-site/dist/
+!bbg/rbh-site/dist/**
