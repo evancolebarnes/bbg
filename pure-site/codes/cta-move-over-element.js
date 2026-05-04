@@ -1,7 +1,7 @@
 const ctaMoveOverElement = (wrapEl, ctaEl) => {
   const wraps = document.querySelectorAll(wrapEl);
   wraps.forEach((wrap) => {
-    const button = wrap.querySelector(".button_main_wrap");
+    const button = wrap.querySelector(ctaEl);
     const buttonRect = button.getBoundingClientRect();
 
     wrap.addEventListener("mousemove", (event) => {
