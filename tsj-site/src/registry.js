@@ -1,5 +1,5 @@
-import productScroll from "./animations/product-scroll";
+// import productScroll from "./animations/product-scroll";
 
 export default {
-  productScroll,
+  productScroll: () => import("./animations/product-scroll.js"),
 };
