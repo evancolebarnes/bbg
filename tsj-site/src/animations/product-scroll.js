@@ -81,7 +81,6 @@ export default function productScroll() {
       start: "top-=50% center",
       end: "bottom-=10% bottom",
       scrub: 1,
-      // markers: true,
 
       onEnter: () => enableWillChange(blockElements),
       onEnterBack: () => enableWillChange(blockElements),
