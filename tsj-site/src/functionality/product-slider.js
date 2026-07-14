@@ -1,40 +1,56 @@
 export default function productSlider() {
+  const listWrap = document.querySelector(".products_list_wrap");
+  const list = document.querySelector(".products_list");
+  const items = [...document.querySelectorAll(".products_item")];
+
+  if (!listWrap || !list || !items.length) return;
+
   let swiperInstance = null;
 
   function initSwiper() {
-    const windowWidth = window.innerWidth;
+    const isDesktop = window.innerWidth >= 991;
 
-    const isDesktop = windowWidth >= 991;
-    console.log(isDesktop);
-
-    if (!isDesktop) {
-      if (!swiperInstance) {
-        swiperInstance = new Swiper(".swiper", {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          breakpoints: {
-            // When window width is >= 480px
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-          },
-          navigation: {
-            nextEl: ".products_slider_button.is-next-button",
-            prevEl: ".products_slider_button.is-prev-button",
-          },
-        });
-      }
-    } else {
+    if (isDesktop) {
       if (swiperInstance) {
         swiperInstance.destroy(true, true);
         swiperInstance = null;
       }
+
+      listWrap.classList.remove("swiper");
+      list.classList.remove("swiper-wrapper");
+      items.forEach((item) => {
+        item.classList.remove("swiper-slide");
+        item.removeAttribute("style");
+      });
+
+      list.removeAttribute("style");
+      listWrap.removeAttribute("style");
+
+      return;
     }
+
+    if (swiperInstance) return;
+
+    listWrap.classList.add("swiper");
+    list.classList.add("swiper-wrapper");
+    items.forEach((item) => item.classList.add("swiper-slide"));
+
+    swiperInstance = new Swiper(listWrap, {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      breakpoints: {
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+      },
+      navigation: {
+        nextEl: ".products_slider_button.is-next-button",
+        prevEl: ".products_slider_button.is-prev-button",
+      },
+    });
   }
 
   initSwiper();
-
-  // Run on window resize
   window.addEventListener("resize", initSwiper);
 }
