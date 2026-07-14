@@ -3,7 +3,8 @@ import { n as e, t } from "./chunks/rolldown-runtime.js";
 var n, r = e((() => {
 	n = {
 		productScroll: () => import("./chunks/product-scroll.js"),
-		hoverLetterAnimation: () => import("./chunks/letter-hover-animation.js")
+		hoverLetterAnimation: () => import("./chunks/letter-hover-animation.js"),
+		productSlider: () => import("./chunks/product-slider.js")
 	};
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {

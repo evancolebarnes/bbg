@@ -2,13 +2,13 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 
 export default defineConfig({
-  //   server: {
-  //     host: true,
-  //     cors: true,
-  //     headers: {
-  //       "Access-Control-Allow-Origin": "*",
-  //     },
-  //   },
+  server: {
+    host: true,
+    cors: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
   build: {
     outDir: "dist",
     emptyOutDir: true,

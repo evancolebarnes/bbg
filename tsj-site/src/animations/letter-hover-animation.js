@@ -1,6 +1,4 @@
 export default function hoverLetterAnimation() {
-  gsap.registerPlugin(SplitText);
-
   document.querySelectorAll("[data-hover-trigger]").forEach((trigger) => {
     const text = trigger.querySelector('[data-anim="letters-slide-in"]');
     if (!text) return;
@@ -13,8 +11,8 @@ export default function hoverLetterAnimation() {
 
     tl.to(split.chars, {
       yPercent: -100,
-      stagger: 0.02,
-      duration: 0.25,
+      stagger: 0.015,
+      duration: 0.15,
       ease: "power2.out",
     })
       .set(split.chars, {
@@ -22,8 +20,8 @@ export default function hoverLetterAnimation() {
       })
       .to(split.chars, {
         yPercent: 0,
-        stagger: 0.02,
-        duration: 0.25,
+        stagger: 0.015,
+        duration: 0.15,
         ease: "power2.out",
       });
 
