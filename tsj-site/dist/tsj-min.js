@@ -1,18 +1,19 @@
-import { n as e, t } from "./chunks/rolldown-runtime.js";
+import { n as e, r as t, t as n } from "./chunks/rolldown-runtime.js";
 //#region src/registry.js
-var n, r = e((() => {
-	n = {
+var r, i = e((() => {
+	r = {
 		productScroll: () => import("./chunks/product-scroll.js"),
 		hoverLetterAnimation: () => import("./chunks/letter-hover-animation.js"),
-		productSlider: () => import("./chunks/product-slider.js")
+		productSlider: () => import("./chunks/product-slider.js"),
+		_setMembersInitial: () => import("./chunks/set-members-initial.js").then((e) => /* @__PURE__ */ t(e.default, 1))
 	};
-})), i = /* @__PURE__ */ t((() => {
-	r(), window.TSJ = { async init(e = []) {
+})), a = /* @__PURE__ */ n((() => {
+	i(), window.TSJ = { async init(e = []) {
 		for (let t of e) {
-			let e = n[t];
+			let e = r[t];
 			e && (await e()).default();
 		}
 	} };
 }));
 //#endregion
-export default i();
+export default a();
