@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+export default function setMembersInitial() {
   const checkMemberstack = setInterval(() => {
     if (!window.$memberstackDom) return;
 
@@ -63,4 +63,4 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(console.error);
   }, 100);
-});
+}
