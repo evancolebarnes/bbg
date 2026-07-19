@@ -5,7 +5,8 @@ var n, r = e((() => {
 		productScroll: () => import("./chunks/product-scroll.js"),
 		hoverLetterAnimation: () => import("./chunks/letter-hover-animation.js"),
 		productSlider: () => import("./chunks/product-slider.js"),
-		setMembersInitial: () => import("./chunks/set-members-initial.js")
+		setMembersInitial: () => import("./chunks/set-members-initial.js"),
+		downloadZipAssets: () => import("./chunks/download-zip-assets.js")
 	};
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {
