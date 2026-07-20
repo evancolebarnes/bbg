@@ -10,11 +10,9 @@ export default function renderRestaurantsMap() {
     popupAnchor: [0, -45],
   });
   // ----------------------------
-  // Initialize Map
+  // Map
   // ----------------------------
-  const map = L.map("map", {
-    zoomControl: true,
-  });
+  const map = L.map("map");
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
@@ -23,18 +21,12 @@ export default function renderRestaurantsMap() {
 
   const markerLayer = L.layerGroup().addTo(map);
 
-  // ----------------------------
-  // Get Visible Restaurants
-  // ----------------------------
   function getVisibleRestaurants() {
-    return [...document.querySelectorAll(".restaurant_item")].filter((item) => {
-      return window.getComputedStyle(item).display !== "none";
-    });
+    return [...document.querySelectorAll(".restaurant_item")].filter(
+      (item) => window.getComputedStyle(item).display !== "none",
+    );
   }
 
-  // ----------------------------
-  // Render Markers
-  // ----------------------------
   function renderMap() {
     markerLayer.clearLayers();
 
@@ -52,6 +44,10 @@ export default function renderRestaurantsMap() {
 
       bounds.push([lat, lng]);
 
+      const marker = L.marker([lat, lng], {
+        icon: restaurantIcon,
+      }).addTo(markerLayer);
+
       const name =
         item.querySelector(".restaurant_name")?.textContent.trim() || "";
 
@@ -59,17 +55,12 @@ export default function renderRestaurantsMap() {
         item.querySelector(".restaurant_details_wrap")?.textContent.trim() ||
         "";
 
-      const marker = L.marker([lat, lng], {
-        icon: restaurantIcon,
-      }).addTo(markerLayer);
-
       marker.bindPopup(`<strong>${name}</strong><br>${address}`);
 
       marker.on("mouseover", () => marker.openPopup());
       marker.on("mouseout", () => marker.closePopup());
     });
 
-    // Show first restaurant if only one result
     if (bounds.length === 1) {
       map.setView(bounds[0], 12);
     } else {
@@ -82,19 +73,23 @@ export default function renderRestaurantsMap() {
     map.invalidateSize();
   }
 
-  // Initial render
   renderMap();
 
   // ----------------------------
-  // Re-render after Finsweet filters
+  // Finsweet v2
   // ----------------------------
-  window.fsAttributes = window.fsAttributes || [];
+  window.FinsweetAttributes ||= [];
 
-  window.fsAttributes.push([
+  window.FinsweetAttributes.push([
     "list",
     (lists) => {
+      console.log("Finsweet loaded", lists);
+
       lists.forEach((list) => {
-        list.listInstance.on("renderitems", () => {
+        console.log("Listening to renderitems");
+
+        list.on("renderitems", () => {
+          console.log("renderitems fired");
           renderMap();
         });
       });

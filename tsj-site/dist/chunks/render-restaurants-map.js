@@ -6,7 +6,7 @@ function t() {
 		iconSize: [20, 30],
 		iconAnchor: [20, 50],
 		popupAnchor: [0, -45]
-	}), t = L.map("map", { zoomControl: !0 });
+	}), t = L.map("map");
 	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		attribution: "&copy; OpenStreetMap contributors",
 		maxZoom: 19
@@ -24,17 +24,17 @@ function t() {
 			let r = parseFloat(t.dataset.lat), i = parseFloat(t.dataset.long);
 			if (isNaN(r) || isNaN(i)) return;
 			a.push([r, i]);
-			let o = t.querySelector(".restaurant_name")?.textContent.trim() || "", s = t.querySelector(".restaurant_details_wrap")?.textContent.trim() || "", c = L.marker([r, i], { icon: e }).addTo(n);
-			c.bindPopup(`<strong>${o}</strong><br>${s}`), c.on("mouseover", () => c.openPopup()), c.on("mouseout", () => c.closePopup());
+			let o = L.marker([r, i], { icon: e }).addTo(n), s = t.querySelector(".restaurant_name")?.textContent.trim() || "", c = t.querySelector(".restaurant_details_wrap")?.textContent.trim() || "";
+			o.bindPopup(`<strong>${s}</strong><br>${c}`), o.on("mouseover", () => o.openPopup()), o.on("mouseout", () => o.closePopup());
 		}), a.length === 1 ? t.setView(a[0], 12) : t.fitBounds(a, {
 			padding: [60, 60],
 			maxZoom: 12
 		}), t.invalidateSize();
 	}
-	i(), window.fsAttributes = window.fsAttributes || [], window.fsAttributes.push(["list", (e) => {
-		e.forEach((e) => {
-			e.listInstance.on("renderitems", () => {
-				i();
+	i(), window.FinsweetAttributes ||= [], window.FinsweetAttributes.push(["list", (e) => {
+		console.log("Finsweet loaded", e), e.forEach((e) => {
+			console.log("Listening to renderitems"), e.on("renderitems", () => {
+				console.log("renderitems fired"), i();
 			});
 		});
 	}]);
