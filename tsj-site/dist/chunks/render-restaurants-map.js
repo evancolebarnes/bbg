@@ -13,30 +13,27 @@ function t() {
 	}).addTo(t);
 	let n = L.layerGroup().addTo(t);
 	function r() {
-		return [...document.querySelectorAll(".restaurant_item")].filter((e) => window.getComputedStyle(e).display !== "none");
-	}
-	function i() {
 		n.clearLayers();
-		let i = r();
-		if (!i.length) return;
-		let a = [];
-		i.forEach((t) => {
-			let r = parseFloat(t.dataset.lat), i = parseFloat(t.dataset.long);
-			if (isNaN(r) || isNaN(i)) return;
-			a.push([r, i]);
-			let o = L.marker([r, i], { icon: e }).addTo(n), s = t.querySelector(".restaurant_name")?.textContent.trim() || "", c = t.querySelector(".restaurant_details_wrap")?.textContent.trim() || "";
+		let r = [...document.querySelectorAll(".restaurant_item")].filter((e) => getComputedStyle(e).display !== "none");
+		if (!r.length) return;
+		let i = [];
+		r.forEach((t) => {
+			let r = parseFloat(t.dataset.lat), a = parseFloat(t.dataset.long);
+			if (isNaN(r) || isNaN(a)) return;
+			i.push([r, a]);
+			let o = L.marker([r, a], { icon: e }).addTo(n), s = t.querySelector(".restaurant_name")?.textContent.trim() ?? "", c = t.querySelector(".restaurant_details_wrap")?.textContent.trim() ?? "";
 			o.bindPopup(`<strong>${s}</strong><br>${c}`), o.on("mouseover", () => o.openPopup()), o.on("mouseout", () => o.closePopup());
-		}), a.length === 1 ? t.setView(a[0], 12) : t.fitBounds(a, {
+		}), i.length === 1 ? t.setView(i[0], 12) : t.fitBounds(i, {
 			padding: [60, 60],
 			maxZoom: 12
 		}), t.invalidateSize();
 	}
-	i(), window.FinsweetAttributes ||= [], window.FinsweetAttributes.push(["list", (e) => {
-		console.log("Finsweet loaded", e), e.forEach((e) => {
-			console.log("Listening to renderitems"), e.on("renderitems", () => {
-				console.log("renderitems fired"), i();
+	r(), window.FinsweetAttributes ||= [], window.FinsweetAttributes.push(["list", ([e]) => {
+		e.watch(() => e.items.value, () => {
+			requestAnimationFrame(() => {
+				r();
 			});
-		});
+		}, { deep: !0 });
 	}]);
 }
 //#endregion

@@ -9,9 +9,9 @@ export default function renderRestaurantsMap() {
     iconAnchor: [20, 50],
     popupAnchor: [0, -45],
   });
-  // ----------------------------
+  // ---------------------------------
   // Map
-  // ----------------------------
+  // ---------------------------------
   const map = L.map("map");
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -21,16 +21,15 @@ export default function renderRestaurantsMap() {
 
   const markerLayer = L.layerGroup().addTo(map);
 
-  function getVisibleRestaurants() {
-    return [...document.querySelectorAll(".restaurant_item")].filter(
-      (item) => window.getComputedStyle(item).display !== "none",
-    );
-  }
-
+  // ---------------------------------
+  // Render
+  // ---------------------------------
   function renderMap() {
     markerLayer.clearLayers();
 
-    const items = getVisibleRestaurants();
+    const items = [...document.querySelectorAll(".restaurant_item")].filter(
+      (item) => getComputedStyle(item).display !== "none",
+    );
 
     if (!items.length) return;
 
@@ -49,13 +48,13 @@ export default function renderRestaurantsMap() {
       }).addTo(markerLayer);
 
       const name =
-        item.querySelector(".restaurant_name")?.textContent.trim() || "";
+        item.querySelector(".restaurant_name")?.textContent.trim() ?? "";
 
-      const address =
-        item.querySelector(".restaurant_details_wrap")?.textContent.trim() ||
+      const details =
+        item.querySelector(".restaurant_details_wrap")?.textContent.trim() ??
         "";
 
-      marker.bindPopup(`<strong>${name}</strong><br>${address}`);
+      marker.bindPopup(`<strong>${name}</strong><br>${details}`);
 
       marker.on("mouseover", () => marker.openPopup());
       marker.on("mouseout", () => marker.closePopup());
@@ -73,26 +72,28 @@ export default function renderRestaurantsMap() {
     map.invalidateSize();
   }
 
+  // Initial render
   renderMap();
 
-  // ----------------------------
-  // Finsweet v2
-  // ----------------------------
+  // ---------------------------------
+  // Finsweet Watch
+  // ---------------------------------
   window.FinsweetAttributes ||= [];
 
   window.FinsweetAttributes.push([
     "list",
-    (lists) => {
-      console.log("Finsweet loaded", lists);
-
-      lists.forEach((list) => {
-        console.log("Listening to renderitems");
-
-        list.on("renderitems", () => {
-          console.log("renderitems fired");
-          renderMap();
-        });
-      });
+    ([list]) => {
+      list.watch(
+        () => list.items.value,
+        () => {
+          requestAnimationFrame(() => {
+            renderMap();
+          });
+        },
+        {
+          deep: true,
+        },
+      );
     },
   ]);
 }
