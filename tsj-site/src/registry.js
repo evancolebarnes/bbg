@@ -7,4 +7,6 @@ export default {
   renderRestaurantsMap: () =>
     import("./functionality/render-restaurants-map.js"),
   applyDateFilter: () => import("./functionality/apply-date-filter.js"),
+  openAssetPreviewAnimation: () =>
+    import("./animations/open-asset-preview-animation.js"),
 };

@@ -8,7 +8,8 @@ var n, r = e((() => {
 		setMembersInitial: () => import("./chunks/set-members-initial.js"),
 		downloadZipAssets: () => import("./chunks/download-zip-assets.js"),
 		renderRestaurantsMap: () => import("./chunks/render-restaurants-map.js"),
-		applyDateFilter: () => import("./chunks/apply-date-filter.js")
+		applyDateFilter: () => import("./chunks/apply-date-filter.js"),
+		openAssetPreviewAnimation: () => import("./chunks/open-asset-preview-animation.js")
 	};
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {
