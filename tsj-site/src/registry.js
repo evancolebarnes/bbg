@@ -6,4 +6,5 @@ export default {
   downloadZipAssets: () => import("./functionality/download-zip-assets.js"),
   renderRestaurantsMap: () =>
     import("./functionality/render-restaurants-map.js"),
+  applyDateFilter: () => import("./functionality/apply-date-filter.js"),
 };

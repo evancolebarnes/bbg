@@ -7,7 +7,8 @@ var n, r = e((() => {
 		productSlider: () => import("./chunks/product-slider.js"),
 		setMembersInitial: () => import("./chunks/set-members-initial.js"),
 		downloadZipAssets: () => import("./chunks/download-zip-assets.js"),
-		renderRestaurantsMap: () => import("./chunks/render-restaurants-map.js")
+		renderRestaurantsMap: () => import("./chunks/render-restaurants-map.js"),
+		applyDateFilter: () => import("./chunks/apply-date-filter.js")
 	};
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {
