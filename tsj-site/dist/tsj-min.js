@@ -6,7 +6,8 @@ var n, r = e((() => {
 		hoverLetterAnimation: () => import("./chunks/letter-hover-animation.js"),
 		productSlider: () => import("./chunks/product-slider.js"),
 		setMembersInitial: () => import("./chunks/set-members-initial.js"),
-		downloadZipAssets: () => import("./chunks/download-zip-assets.js")
+		downloadZipAssets: () => import("./chunks/download-zip-assets.js"),
+		renderRestaurantsMap: () => import("./chunks/render-restaurants-map.js")
 	};
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {
