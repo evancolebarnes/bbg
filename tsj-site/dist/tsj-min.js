@@ -10,7 +10,13 @@ var n, r = e((() => {
 		renderRestaurantsMap: () => import("./chunks/render-restaurants-map.js"),
 		applyDateFilter: () => import("./chunks/apply-date-filter.js"),
 		openAssetPreviewAnimation: () => import("./chunks/open-asset-preview-animation.js")
-	};
+	}, document.addEventListener("DOMContentLoaded", () => {
+		document.querySelectorAll(".hero_product_item").forEach((e) => {
+			e.addEventListener("click", function() {
+				e.querySelector("input[type=\"radio\"]");
+			});
+		});
+	});
 })), i = /* @__PURE__ */ t((() => {
 	r(), window.TSJ = { async init(e = []) {
 		for (let t of e) {

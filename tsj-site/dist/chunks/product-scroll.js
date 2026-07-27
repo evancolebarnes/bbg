@@ -49,15 +49,7 @@ function t() {
 		yPercent: 0,
 		duration: 1,
 		stagger: .2
-	}).to(".tsj_product_top", {
-		xPercent: 50,
-		yPercent: -50,
-		duration: 1
-	}).to(".tsj_product_bottom", {
-		xPercent: -50,
-		yPercent: 50,
-		duration: 1
-	}, "<"), gsap.timeline({
+	}), gsap.timeline({
 		defaults: { ease: "none" },
 		scrollTrigger: {
 			trigger: ".why_blocks_wrap",

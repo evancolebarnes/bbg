@@ -41,36 +41,35 @@ export default function productScroll() {
     },
   });
 
-  tlProduct
-    .fromTo(
-      hands,
-      {
-        opacity: 0,
-        xPercent: (i) => directions[i].x,
-        yPercent: (i) => directions[i].y,
-      },
-      {
-        opacity: 1,
-        xPercent: 0,
-        yPercent: 0,
-        duration: 1,
-        stagger: 0.2,
-      },
-    )
-    .to(".tsj_product_top", {
-      xPercent: 50,
-      yPercent: -50,
+  tlProduct.fromTo(
+    hands,
+    {
+      opacity: 0,
+      xPercent: (i) => directions[i].x,
+      yPercent: (i) => directions[i].y,
+    },
+    {
+      opacity: 1,
+      xPercent: 0,
+      yPercent: 0,
       duration: 1,
-    })
-    .to(
-      ".tsj_product_bottom",
-      {
-        xPercent: -50,
-        yPercent: 50,
-        duration: 1,
-      },
-      "<",
-    );
+      stagger: 0.2,
+    },
+  );
+  // .to(".tsj_product_top", {
+  //   xPercent: 50,
+  //   yPercent: -50,
+  //   duration: 1,
+  // })
+  // .to(
+  //   ".tsj_product_bottom",
+  //   {
+  //     xPercent: -50,
+  //     yPercent: 50,
+  //     duration: 1,
+  //   },
+  //   "<",
+  // );
 
   const tlBlocks = gsap.timeline({
     defaults: {

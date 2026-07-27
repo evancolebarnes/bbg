@@ -10,3 +10,11 @@ export default {
   openAssetPreviewAnimation: () =>
     import("./animations/open-asset-preview-animation.js"),
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".hero_product_item").forEach((card) => {
+    card.addEventListener("click", function () {
+      const firstRadio = card.querySelector('input[type="radio"]');
+    });
+  });
+});
