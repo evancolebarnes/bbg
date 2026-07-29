@@ -10,22 +10,24 @@ export default function productSlider() {
   function initSwiper() {
     const isDesktop = window.innerWidth >= 991;
 
-    if (swiperInstance) {
-      swiperInstance.destroy(true, true);
-      swiperInstance = null;
+    if (isDesktop) {
+      if (swiperInstance) {
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
+      }
+
+      listWrap.classList.remove("swiper");
+      list.classList.remove("swiper-wrapper");
+      items.forEach((item) => {
+        item.classList.remove("swiper-slide");
+        item.removeAttribute("style");
+      });
+
+      list.removeAttribute("style");
+      listWrap.removeAttribute("style");
+
+      return;
     }
-
-    listWrap.classList.remove("swiper");
-    list.classList.remove("swiper-wrapper");
-    items.forEach((item) => {
-      item.classList.remove("swiper-slide");
-      item.removeAttribute("style");
-    });
-
-    list.removeAttribute("style");
-    listWrap.removeAttribute("style");
-
-    return;
 
     if (swiperInstance) return;
 
