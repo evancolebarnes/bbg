@@ -26,29 +26,29 @@ export default function productSlider() {
     listWrap.removeAttribute("style");
 
     return;
+
+    if (swiperInstance) return;
+
+    listWrap.classList.add("swiper");
+    list.classList.add("swiper-wrapper");
+    items.forEach((item) => item.classList.add("swiper-slide"));
+
+    swiperInstance = new Swiper(listWrap, {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      breakpoints: {
+        480: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+      },
+      navigation: {
+        nextEl: ".products_slider_button.is-next-button",
+        prevEl: ".products_slider_button.is-prev-button",
+      },
+    });
   }
 
-  if (swiperInstance) return;
-
-  listWrap.classList.add("swiper");
-  list.classList.add("swiper-wrapper");
-  items.forEach((item) => item.classList.add("swiper-slide"));
-
-  swiperInstance = new Swiper(listWrap, {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    breakpoints: {
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 20,
-      },
-    },
-    navigation: {
-      nextEl: ".products_slider_button.is-next-button",
-      prevEl: ".products_slider_button.is-prev-button",
-    },
-  });
+  initSwiper();
+  window.addEventListener("resize", initSwiper);
 }
-
-initSwiper();
-window.addEventListener("resize", initSwiper);
