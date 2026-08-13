@@ -1,3 +1,117 @@
+const initLoadingAnimation = () => {
+  gsap.set(`.home_hero_layout`, {
+    yPercent: 100,
+  });
+
+  let t = gsap.timeline({
+    defaults: {
+      ease: `power2.inOut`,
+      duration: 0.8,
+    },
+  });
+
+  t.to(`.loading_image`, {
+    opacity: 1,
+  })
+    .to([`.loading_image:nth-child(3n+1)`, `.loading_image:nth-child(3n+3)`], {
+      yPercent: 100,
+      y: `4vh`,
+    })
+    .to(
+      `.loading_image:nth-child(3n+2)`,
+      {
+        yPercent: -100,
+        y: `-4vh`,
+      },
+      `<`,
+    )
+    .to(`.loading_image:not([data-hero-sec])`, {
+      opacity: 0,
+    })
+    .set(`[data-hero-sec]`, {
+      overflow: `visible`,
+    })
+    .set(`[data-hero-sec] img`, {
+      flexShrink: `0`,
+    });
+
+  let n = gsap.matchMedia();
+
+  // Safari detection
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  n.add(`(min-width: 768px)`, () => {
+    t.to(
+      `[data-hero-sec] img`,
+      {
+        width: `100vw`,
+        maxWidth: `none`,
+        height: `100dvh`,
+        x: `-8vh`,
+      },
+      `>`,
+    );
+  });
+
+  n.add(`(max-width: 767px)`, () => {
+    if (isSafari) {
+      // Safari workaround
+      const offset = window.innerHeight * 0.04;
+
+      t.to(
+        `[data-hero-sec] img`,
+        {
+          width: `100vw`,
+          maxWidth: `none`,
+          height: `100dvh`,
+          x: 0,
+          y: `-${offset}px`,
+          scaleX: 1.06,
+          scaleY: 1.06,
+          transformOrigin: `center center`,
+        },
+        `>`,
+      );
+    } else {
+      // Original Chrome / Android behavior
+      t.to(
+        `[data-hero-sec] img`,
+        {
+          width: `100vw`,
+          maxWidth: `none`,
+          height: `100dvh`,
+          x: `-4vh`,
+          y: `-4vh`,
+        },
+        `>`,
+      );
+    }
+  });
+
+  t.set(`.loading_frame`, {
+    display: `none`,
+  })
+    .to(
+      `.home_hero_layout`,
+      {
+        yPercent: 0,
+      },
+      `<`,
+    )
+    .to(
+      `.home_hero_image_wrap`,
+      {
+        height: window.innerWidth >= 768 ? `85dvh` : `auto`,
+      },
+      `<`,
+    );
+
+  t.eventCallback(`onComplete`, () => {
+    e && e();
+  });
+};
+
+/*
 const initLoadingAnimation = (callBack) => {
   gsap.set(".loading_column", { y: 0 });
   gsap.set("body", {
@@ -155,7 +269,7 @@ const initLoadingAnimation = (callBack) => {
     );
   });
 };
-
+*/
 
 /*
 const initLoadingAnimation = (callBack) => {
