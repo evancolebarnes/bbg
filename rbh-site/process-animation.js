@@ -12,11 +12,12 @@ const setupProcessAnimation = () => {
     scrollTrigger: {
       trigger: ".process_track",
       start: "top top",
-      end: "+=400%",
-      pin: true,
+      // end: "+=400%",
+      end: "bottom bottom",
+      // pin: true,
       scrub: true,
       markers: false,
-      anticipatePin: 1,
+      // anticipatePin: 1,
     },
   });
   const imagesReversed = [...allImages].reverse();
