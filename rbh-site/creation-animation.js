@@ -14,10 +14,10 @@ const setupCreationAnimation = () => {
       start: "top top",
       // end: "+=400%",
       end: "bottom bottom",
-      pin: true,
+      // pin: true,
       scrub: true,
       markers: false,
-      anticipatePin: 1,
+      // anticipatePin: 1,
     },
   });
 
