@@ -6,11 +6,12 @@ const setupFoundationAnimation = () => {
     scrollTrigger: {
       trigger: track,
       start: "top top",
-      end: "+=300%",
+      // end: "+=300%",
+      end: "bottom bottom",
       scrub: true,
-      pin: true,
+      // pin: true,
       markers: false,
-      anticipatePin: 1,
+      // anticipatePin: 1,
       invalidateOnRefresh: true,
     },
   });
