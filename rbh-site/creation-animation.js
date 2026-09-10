@@ -1,5 +1,6 @@
 const setupCreationAnimation = () => {
-  const creationSec = document.querySelector(".creation_wrap");
+  // const creationSec = document.querySelector(".creation_wrap");
+  const creationSec = document.querySelector(".creation_track");
   const allCreationBlock = [
     ...document.querySelectorAll(".creation_collection_item"),
   ];
@@ -11,7 +12,8 @@ const setupCreationAnimation = () => {
     scrollTrigger: {
       trigger: creationSec,
       start: "top top",
-      end: "+=400%",
+      // end: "+=400%",
+      end: "bottom bottom",
       pin: true,
       scrub: true,
       markers: false,
