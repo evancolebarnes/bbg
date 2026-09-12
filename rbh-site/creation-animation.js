@@ -258,7 +258,7 @@ const setupCreationAnimation = () => {
           pinSpacing: true,
 
           start: "top top",
-          end: "+=100%",
+          end: "+=200%",
 
           scrub: 1,
 
