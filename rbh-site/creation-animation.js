@@ -251,22 +251,10 @@ const setupCreationAnimation = () => {
       gsap.timeline({
         scrollTrigger: {
           trigger: item,
-
-          // PIN ONLY ON MOBILE
-          pin: true,
-          pinSpacing: true,
-
           start: "top top",
-          end: "+=100%",
+          end: "bottom bottom+=100%",
 
           scrub: 1,
-
-          markers: {
-            startColor: "green",
-            endColor: "red",
-            fontSize: "12px",
-            indent: 20 + i * 10,
-          },
 
           refreshPriority: 1,
           invalidateOnRefresh: true,
