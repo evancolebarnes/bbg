@@ -28,15 +28,23 @@ const setupCreationAnimation = () => {
         end: "bottom bottom",
         scrub: true,
         markers: false,
+        invalidateOnRefresh: true,
+        refreshPriority: 0,
       },
     });
 
+    // ------------------------------------------
+    // Clip block
+    // ------------------------------------------
     const clipBlock = (element) => {
       if (!element) return;
 
       gsap.set(element, {
         overflow: "hidden",
         willChange: "clip-path",
+      });
+
+      gsap.set(element, {
         webkitClipPath:
           "polygon(0 0, 100% 0, 100% 0, 0 0)",
         clipPath:
@@ -44,6 +52,9 @@ const setupCreationAnimation = () => {
       });
     };
 
+    // ------------------------------------------
+    // Creation blocks
+    // ------------------------------------------
     allCreationBlock.forEach((block, i, arr) => {
       const primaryImageWrap = block.querySelector(
         ".creation_visual_blocks_wrap"
@@ -61,6 +72,9 @@ const setupCreationAnimation = () => {
 
       const step = gsap.timeline();
 
+      // ----------------------------------------
+      // Hide previous block
+      // ----------------------------------------
       if (i > 0) {
         const previousTextElements =
           allCreationBlock[i - 1].querySelectorAll(
@@ -84,12 +98,16 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // FIRST
+      // ----------------------------------------
+      // First block
+      // ----------------------------------------
       if (i === 0) {
         step
           .fromTo(
             primaryImageWrap,
-            { scale: 0 },
+            {
+              scale: 0,
+            },
             {
               scale: 1,
               duration: 1.2,
@@ -98,7 +116,9 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             secondaryImage,
-            { scale: 3 },
+            {
+              scale: 3,
+            },
             {
               scale: 1,
               duration: 1.2,
@@ -118,7 +138,9 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // MIDDLE
+      // ----------------------------------------
+      // Middle blocks
+      // ----------------------------------------
       if (i > 0 && i < arr.length - 1) {
         clipBlock(secondaryImage);
 
@@ -134,7 +156,9 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             primaryImageWrap,
-            { opacity: 0 },
+            {
+              opacity: 0,
+            },
             {
               opacity: 1,
               duration: 1.2,
@@ -171,9 +195,7 @@ const setupCreationAnimation = () => {
 
         if (i === arr.length - 2) {
           step.set(
-            block.querySelector(
-              ".creation_content_block"
-            ),
+            block.querySelector(".creation_content_block"),
             {
               display: "none",
             }
@@ -181,7 +203,9 @@ const setupCreationAnimation = () => {
         }
       }
 
-      // LAST
+      // ----------------------------------------
+      // Last block
+      // ----------------------------------------
       if (i === arr.length - 1) {
         const allSecondaryImages =
           document.querySelectorAll(
@@ -205,7 +229,9 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             allPrimaryImages,
-            { opacity: 0 },
+            {
+              opacity: 0,
+            },
             {
               opacity: 1,
               duration: 1.2,
@@ -237,7 +263,7 @@ const setupCreationAnimation = () => {
   });
 
   // ==========================================
-  // MOBILE
+  // MOBILE / TABLET
   // ==========================================
   mm.add("(max-width: 990px)", () => {
     const creationItems = gsap.utils.toArray(
@@ -257,6 +283,7 @@ const setupCreationAnimation = () => {
         scrollTrigger: {
           trigger: item,
 
+          // Pin only on mobile/tablet
           pin: true,
           pinSpacing: true,
 
@@ -265,6 +292,9 @@ const setupCreationAnimation = () => {
 
           scrub: 1,
           markers: false,
+
+          // Make Creation pins calculate first
+          refreshPriority: 1,
 
           invalidateOnRefresh: true,
         },
