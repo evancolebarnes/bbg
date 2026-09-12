@@ -1,7 +1,5 @@
 const setupProcessAnimation = () => {
-  const processTrack = document.querySelector(
-    ".process_track"
-  );
+  const processTrack = document.querySelector(".process_track");
 
   if (!processTrack) return;
 
@@ -12,8 +10,6 @@ const setupProcessAnimation = () => {
   const allParaWrap = document.querySelectorAll(
     ".process_para_wrap"
   );
-
-  if (!allImages.length || !allParaWrap.length) return;
 
   gsap.set(allImages, {
     opacity: 0,
@@ -37,7 +33,6 @@ const setupProcessAnimation = () => {
 
       scrub: true,
 
-      // Debug markers
       markers: {
         startColor: "blue",
         endColor: "orange",
@@ -58,35 +53,24 @@ const setupProcessAnimation = () => {
     if (!currentWrap) return;
 
     const prevWrap = allParaWrap[i - 1];
-
     const text = currentWrap.querySelector(
       ".process_block_text"
     );
 
-    if (text) {
-      gsap.set(text, {
-        yPercent: 100,
-        opacity: 0,
-      });
-    }
+    gsap.set(text, {
+      yPercent: 100,
+      opacity: 0,
+    });
 
     const step = gsap.timeline();
 
-    step.to(
-      image,
-      {
+    step
+      .to(image, {
         opacity: 1,
-      },
-      0
-    );
-
-    step.to(
-      currentWrap,
-      {
+      }, 0)
+      .to(currentWrap, {
         height: "auto",
-      },
-      0
-    );
+      }, 0);
 
     if (prevWrap) {
       step.to(
@@ -94,19 +78,6 @@ const setupProcessAnimation = () => {
         {
           height: 0,
           overflow: "hidden",
-        },
-        "<"
-      );
-    }
-
-    if (text) {
-      step.to(
-        text,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
         },
         "<"
       );
