@@ -6,21 +6,29 @@ const setupCreationAnimation = () => {
   // ==========================================
   mm.add("(min-width: 991px)", () => {
     const creationSec = document.querySelector(".creation_track");
-
     const allCreationBlock = [
       ...document.querySelectorAll(".creation_collection_item"),
     ];
 
     if (!creationSec || !allCreationBlock.length) return;
 
-    gsap.set(allCreationBlock, { autoAlpha: 0 });
-    gsap.set(allCreationBlock[0], { autoAlpha: 1 });
+    gsap.set(allCreationBlock, {
+      autoAlpha: 0,
+    });
+
+    gsap.set(allCreationBlock[0], {
+      autoAlpha: 1,
+    });
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: creationSec,
         start: "top top",
         end: "bottom bottom",
+
+        // NO PIN ON DESKTOP
+        pin: false,
+
         scrub: true,
         markers: false,
         invalidateOnRefresh: true,
@@ -28,14 +36,9 @@ const setupCreationAnimation = () => {
     });
 
     const clipBlock = (element) => {
-      if (!element) return;
-
       gsap.set(element, {
         overflow: "hidden",
         willChange: "clip-path",
-      });
-
-      gsap.set(element, {
         webkitClipPath:
           "polygon(0 0, 100% 0, 100% 0, 0 0)",
         clipPath:
@@ -55,8 +58,6 @@ const setupCreationAnimation = () => {
       const revealBlocks = block.querySelectorAll(
         ".reveal_block"
       );
-
-      if (!primaryImageWrap) return;
 
       const step = gsap.timeline();
 
@@ -83,7 +84,6 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // First block
       if (i === 0) {
         step
           .fromTo(
@@ -117,7 +117,6 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // Middle blocks
       if (i > 0 && i < arr.length - 1) {
         clipBlock(secondaryImage);
 
@@ -178,7 +177,6 @@ const setupCreationAnimation = () => {
         }
       }
 
-      // Last block
       if (i === arr.length - 1) {
         const allSecondaryImages =
           document.querySelectorAll(
@@ -234,9 +232,9 @@ const setupCreationAnimation = () => {
   });
 
   // ==========================================
-  // MOBILE / TABLET
+  // MOBILE
   // ==========================================
-  mm.add("(max-width: 990px)", () => {
+  mm.add("(max-width: 479px)", () => {
     const creationItems = gsap.utils.toArray(
       ".creation_collection_item"
     );
@@ -254,15 +252,15 @@ const setupCreationAnimation = () => {
         scrollTrigger: {
           trigger: item,
 
+          // PIN ONLY ON MOBILE
           pin: true,
           pinSpacing: true,
 
           start: "top top",
-          end: "+=200%",
+          end: "+=100%",
 
           scrub: 1,
 
-          // Debug markers
           markers: {
             startColor: "green",
             endColor: "red",
@@ -280,6 +278,4 @@ const setupCreationAnimation = () => {
       });
     });
   });
-
-  return mm;
 };
