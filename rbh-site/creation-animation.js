@@ -13,13 +13,8 @@ const setupCreationAnimation = () => {
 
     if (!creationSec || !allCreationBlock.length) return;
 
-    gsap.set(allCreationBlock, {
-      autoAlpha: 0,
-    });
-
-    gsap.set(allCreationBlock[0], {
-      autoAlpha: 1,
-    });
+    gsap.set(allCreationBlock, { autoAlpha: 0 });
+    gsap.set(allCreationBlock[0], { autoAlpha: 1 });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -32,9 +27,6 @@ const setupCreationAnimation = () => {
       },
     });
 
-    // ------------------------------------------
-    // Clip block
-    // ------------------------------------------
     const clipBlock = (element) => {
       if (!element) return;
 
@@ -51,9 +43,6 @@ const setupCreationAnimation = () => {
       });
     };
 
-    // ------------------------------------------
-    // Creation blocks
-    // ------------------------------------------
     allCreationBlock.forEach((block, i, arr) => {
       const primaryImageWrap = block.querySelector(
         ".creation_visual_blocks_wrap"
@@ -71,9 +60,6 @@ const setupCreationAnimation = () => {
 
       const step = gsap.timeline();
 
-      // ----------------------------------------
-      // Hide previous block
-      // ----------------------------------------
       if (i > 0) {
         const previousTextElements =
           allCreationBlock[i - 1].querySelectorAll(
@@ -97,16 +83,12 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // ----------------------------------------
       // First block
-      // ----------------------------------------
       if (i === 0) {
         step
           .fromTo(
             primaryImageWrap,
-            {
-              scale: 0,
-            },
+            { scale: 0 },
             {
               scale: 1,
               duration: 1.2,
@@ -115,9 +97,7 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             secondaryImage,
-            {
-              scale: 3,
-            },
+            { scale: 3 },
             {
               scale: 1,
               duration: 1.2,
@@ -137,9 +117,7 @@ const setupCreationAnimation = () => {
           );
       }
 
-      // ----------------------------------------
       // Middle blocks
-      // ----------------------------------------
       if (i > 0 && i < arr.length - 1) {
         clipBlock(secondaryImage);
 
@@ -155,9 +133,7 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             primaryImageWrap,
-            {
-              opacity: 0,
-            },
+            { opacity: 0 },
             {
               opacity: 1,
               duration: 1.2,
@@ -194,9 +170,7 @@ const setupCreationAnimation = () => {
 
         if (i === arr.length - 2) {
           step.set(
-            block.querySelector(
-              ".creation_content_block"
-            ),
+            block.querySelector(".creation_content_block"),
             {
               display: "none",
             }
@@ -204,9 +178,7 @@ const setupCreationAnimation = () => {
         }
       }
 
-      // ----------------------------------------
       // Last block
-      // ----------------------------------------
       if (i === arr.length - 1) {
         const allSecondaryImages =
           document.querySelectorAll(
@@ -230,9 +202,7 @@ const setupCreationAnimation = () => {
           )
           .fromTo(
             allPrimaryImages,
-            {
-              opacity: 0,
-            },
+            { opacity: 0 },
             {
               opacity: 1,
               duration: 1.2,
@@ -284,9 +254,6 @@ const setupCreationAnimation = () => {
         scrollTrigger: {
           trigger: item,
 
-          // -------------------------------
-          // MOBILE PIN
-          // -------------------------------
           pin: true,
           pinSpacing: true,
 
@@ -295,9 +262,7 @@ const setupCreationAnimation = () => {
 
           scrub: 1,
 
-          // -------------------------------
-          // MOBILE DEBUG MARKERS
-          // -------------------------------
+          // Debug markers
           markers: {
             startColor: "green",
             endColor: "red",
@@ -305,19 +270,12 @@ const setupCreationAnimation = () => {
             indent: 20 + i * 10,
           },
 
-          // -------------------------------
-          // Refresh order
-          // -------------------------------
           refreshPriority: 1,
           invalidateOnRefresh: true,
         },
       }).to(layout, {
         xPercent: -100,
-
-        x: () => {
-          return getComputedStyle(layout).gap;
-        },
-
+        x: () => getComputedStyle(layout).gap,
         ease: "none",
       });
     });
@@ -325,172 +283,3 @@ const setupCreationAnimation = () => {
 
   return mm;
 };
-
-
-// ==========================================
-// PROCESS ANIMATION
-// ==========================================
-const setupProcessAnimation = () => {
-  const processTrack = document.querySelector(
-    ".process_track"
-  );
-
-  if (!processTrack) return;
-
-  const allImages = processTrack.querySelectorAll(
-    ".u-image-wrapper"
-  );
-
-  const allParaWrap = document.querySelectorAll(
-    ".process_para_wrap"
-  );
-
-  if (!allImages.length || !allParaWrap.length) return;
-
-  // ------------------------------------------
-  // Initial states
-  // ------------------------------------------
-  gsap.set(allImages, {
-    opacity: 0,
-  });
-
-  gsap.set(allImages[allImages.length - 1], {
-    opacity: 1,
-  });
-
-  gsap.set(allParaWrap, {
-    height: 0,
-    overflow: "hidden",
-  });
-
-  // ------------------------------------------
-  // Process ScrollTrigger
-  // ------------------------------------------
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: processTrack,
-
-      start: "top top",
-      end: "bottom bottom",
-
-      scrub: true,
-
-      // -------------------------------
-      // PROCESS DEBUG MARKERS
-      // -------------------------------
-      markers: {
-        startColor: "blue",
-        endColor: "orange",
-        fontSize: "12px",
-        indent: 20,
-      },
-
-      // Process calculates after Creation
-      refreshPriority: 0,
-      invalidateOnRefresh: true,
-    },
-  });
-
-  // ------------------------------------------
-  // Reverse images
-  // ------------------------------------------
-  const imagesReversed = [...allImages].reverse();
-
-  imagesReversed.forEach((image, i) => {
-    const currentWrap = allParaWrap[i];
-
-    if (!currentWrap) return;
-
-    const prevWrap = allParaWrap[i - 1];
-
-    const text = currentWrap.querySelector(
-      ".process_block_text"
-    );
-
-    if (text) {
-      gsap.set(text, {
-        yPercent: 100,
-        opacity: 0,
-      });
-    }
-
-    const step = gsap.timeline();
-
-    // Image
-    step.to(
-      image,
-      {
-        opacity: 1,
-      },
-      0
-    );
-
-    // Current text wrapper
-    step.to(
-      currentWrap,
-      {
-        height: "auto",
-      },
-      0
-    );
-
-    // Previous text wrapper
-    if (prevWrap) {
-      step.to(
-        prevWrap,
-        {
-          height: 0,
-          overflow: "hidden",
-        },
-        "<"
-      );
-    }
-
-    // Text reveal
-    if (text) {
-      step.to(
-        text,
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "<"
-      );
-    }
-
-    tl.add(step);
-  });
-};
-
-
-// ==========================================
-// INITIALIZE
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-  requestAnimationFrame(() => {
-    initLoadingAnimation();
-
-    setupFoundationAnimation();
-
-    setupCreationAnimation();
-
-    setupProcessAnimation();
-
-    // Initial refresh
-    ScrollTrigger.refresh();
-
-    bbG_Utility.SliderHeightUtility(
-      testimonialSliderUtility
-    );
-  });
-});
-
-
-// ==========================================
-// FINAL REFRESH AFTER PAGE LOAD
-// ==========================================
-window.addEventListener("load", () => {
-  ScrollTrigger.refresh();
-});
