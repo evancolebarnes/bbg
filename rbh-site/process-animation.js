@@ -1,7 +1,5 @@
 const setupProcessAnimation = () => {
-  const processTrack = document.querySelector(
-    ".process_track"
-  );
+  const processTrack = document.querySelector(".process_track");
 
   if (!processTrack) return;
 
@@ -9,11 +7,15 @@ const setupProcessAnimation = () => {
     ".u-image-wrapper"
   );
 
-  const allParaWrap =
-    document.querySelectorAll(".process_para_wrap");
+  const allParaWrap = document.querySelectorAll(
+    ".process_para_wrap"
+  );
 
   if (!allImages.length || !allParaWrap.length) return;
 
+  // ------------------------------------------
+  // Initial states
+  // ------------------------------------------
   gsap.set(allImages, {
     opacity: 0,
   });
@@ -27,21 +29,31 @@ const setupProcessAnimation = () => {
     overflow: "hidden",
   });
 
-  const imagesReversed = [...allImages].reverse();
-
+  // ------------------------------------------
+  // Process ScrollTrigger
+  // ------------------------------------------
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: processTrack,
+
       start: "top top",
       end: "bottom bottom",
+
       scrub: true,
       markers: false,
 
-      // Important when previous sections have pins
+      // Creation pins calculate before Process
+      refreshPriority: 0,
+
       invalidateOnRefresh: true,
     },
   });
 
+  const imagesReversed = [...allImages].reverse();
+
+  // ------------------------------------------
+  // Process steps
+  // ------------------------------------------
   imagesReversed.forEach((image, i) => {
     const currentWrap = allParaWrap[i];
 
@@ -78,6 +90,8 @@ const setupProcessAnimation = () => {
       0
     );
 
+    // Only animate previous wrapper
+    // if one actually exists
     if (prevWrap) {
       step.to(
         prevWrap,
