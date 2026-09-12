@@ -1,58 +1,106 @@
 const setupProcessAnimation = () => {
-  const allImages = document
-    .querySelector(".process_track")
-    .querySelectorAll(".u-image-wrapper");
-  const allParaWrap = document.querySelectorAll(".process_para_wrap");
-  gsap.set(allImages, { opacity: 0 });
-  gsap.set(allImages[allImages.length - 1], { opacity: 1 });
+  const processTrack = document.querySelector(
+    ".process_track"
+  );
 
-  gsap.set(allParaWrap, { height: 0, overflow: "hidden" });
+  if (!processTrack) return;
+
+  const allImages = processTrack.querySelectorAll(
+    ".u-image-wrapper"
+  );
+
+  const allParaWrap =
+    document.querySelectorAll(".process_para_wrap");
+
+  if (!allImages.length || !allParaWrap.length) return;
+
+  gsap.set(allImages, {
+    opacity: 0,
+  });
+
+  gsap.set(allImages[allImages.length - 1], {
+    opacity: 1,
+  });
+
+  gsap.set(allParaWrap, {
+    height: 0,
+    overflow: "hidden",
+  });
+
+  const imagesReversed = [...allImages].reverse();
 
   const tl = gsap.timeline({
     scrollTrigger: {
-      trigger: ".process_track",
+      trigger: processTrack,
       start: "top top",
-      // end: "+=400%",
       end: "bottom bottom",
-      // pin: true,
       scrub: true,
       markers: false,
-      // anticipatePin: 1,
+
+      // Important when previous sections have pins
+      invalidateOnRefresh: true,
     },
   });
-  const imagesReversed = [...allImages].reverse();
 
   imagesReversed.forEach((image, i) => {
     const currentWrap = allParaWrap[i];
+
+    if (!currentWrap) return;
+
     const prevWrap = allParaWrap[i - 1];
-    const text = currentWrap.querySelector(".process_block_text");
 
-    gsap.set(text, { yPercent: 100, opacity: 0 });
+    const text = currentWrap.querySelector(
+      ".process_block_text"
+    );
 
-    const step = gsap.timeline({
-      onComplete: () => {
-        gsap.to(text, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        });
+    if (text) {
+      gsap.set(text, {
+        yPercent: 100,
+        opacity: 0,
+      });
+    }
+
+    const step = gsap.timeline();
+
+    step.to(
+      image,
+      {
+        opacity: 1,
       },
-    });
+      0
+    );
 
-    step
-      .to(image, { opacity: 1 }, 0)
-      .to(currentWrap, {
+    step.to(
+      currentWrap,
+      {
         height: "auto",
-      })
-      .to(
-        prevWrap || {},
+      },
+      0
+    );
+
+    if (prevWrap) {
+      step.to(
+        prevWrap,
         {
           height: 0,
           overflow: "hidden",
         },
-        "<",
+        "<"
       );
+    }
+
+    if (text) {
+      step.to(
+        text,
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "<"
+      );
+    }
 
     tl.add(step);
   });
