@@ -1,5 +1,7 @@
 const setupProcessAnimation = () => {
-  const processTrack = document.querySelector(".process_track");
+  const processTrack = document.querySelector(
+    ".process_track"
+  );
 
   if (!processTrack) return;
 
@@ -13,9 +15,6 @@ const setupProcessAnimation = () => {
 
   if (!allImages.length || !allParaWrap.length) return;
 
-  // ------------------------------------------
-  // Initial states
-  // ------------------------------------------
   gsap.set(allImages, {
     opacity: 0,
   });
@@ -29,9 +28,6 @@ const setupProcessAnimation = () => {
     overflow: "hidden",
   });
 
-  // ------------------------------------------
-  // Process ScrollTrigger
-  // ------------------------------------------
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: processTrack,
@@ -40,20 +36,22 @@ const setupProcessAnimation = () => {
       end: "bottom bottom",
 
       scrub: true,
-      markers: false,
 
-      // Creation pins calculate before Process
+      // Debug markers
+      markers: {
+        startColor: "blue",
+        endColor: "orange",
+        fontSize: "12px",
+        indent: 20,
+      },
+
       refreshPriority: 0,
-
       invalidateOnRefresh: true,
     },
   });
 
   const imagesReversed = [...allImages].reverse();
 
-  // ------------------------------------------
-  // Process steps
-  // ------------------------------------------
   imagesReversed.forEach((image, i) => {
     const currentWrap = allParaWrap[i];
 
@@ -90,8 +88,6 @@ const setupProcessAnimation = () => {
       0
     );
 
-    // Only animate previous wrapper
-    // if one actually exists
     if (prevWrap) {
       step.to(
         prevWrap,
