@@ -1,7 +1,7 @@
 import { n as e } from "./rolldown-runtime.js";
 //#region src/functionality/product-slider.js
 function t() {
-	let e = document.querySelector(".products_list_wrap"), t = document.querySelector(".products_list"), n = [...document.querySelectorAll(".products_item")];
+	let e = document.querySelector(".hero_products_list_wrap"), t = document.querySelector(".hero_products_list"), n = [...document.querySelectorAll(".hero_product_item")];
 	if (!e || !t || !n.length) return;
 	let r = null;
 	function i() {

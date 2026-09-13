@@ -1,7 +1,10 @@
 export default function productSlider() {
-  const listWrap = document.querySelector(".products_list_wrap");
-  const list = document.querySelector(".products_list");
-  const items = [...document.querySelectorAll(".products_item")];
+  const listWrap = document.querySelector(".hero_products_list_wrap");
+  const list = document.querySelector(".hero_products_list");
+  const items = [...document.querySelectorAll(".hero_product_item")];
+  // const listWrap = document.querySelector(".products_list_wrap");
+  // const list = document.querySelector(".products_list");
+  // const items = [...document.querySelectorAll(".products_item")];
 
   if (!listWrap || !list || !items.length) return;
 
