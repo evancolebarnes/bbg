@@ -41,12 +41,18 @@ export default function productSlider() {
     swiperInstance = new Swiper(listWrap, {
       slidesPerView: 1,
       spaceBetween: 20,
-      breakpoints: {
-        480: {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
+
+      effect: "fade",
+
+      fadeEffect: {
+        crossFade: true,
       },
+      // breakpoints: {
+      //   480: {
+      //     slidesPerView: 2,
+      //     spaceBetween: 20,
+      //   },
+      // },
       navigation: {
         nextEl: ".products_slider_button.is-next-button",
         prevEl: ".products_slider_button.is-prev-button",
