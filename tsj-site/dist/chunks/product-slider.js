@@ -14,8 +14,10 @@ function t() {
 		r ||= (e.classList.add("swiper"), t.classList.add("swiper-wrapper"), n.forEach((e) => e.classList.add("swiper-slide")), new Swiper(e, {
 			slidesPerView: 1,
 			spaceBetween: 20,
-			effect: "fade",
-			fadeEffect: { crossFade: !0 },
+			breakpoints: { 480: {
+				slidesPerView: 2,
+				spaceBetween: 20
+			} },
 			navigation: {
 				nextEl: ".products_slider_button.is-next-button",
 				prevEl: ".products_slider_button.is-prev-button"
